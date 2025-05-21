@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <title>Agenda de contactos</title>
   </head>
@@ -53,12 +53,78 @@
             </tr>
           </thead>
           <tbody>
+            <!-- Darth Vader -->
             <tr>
               <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>3849393</td>
-              <td>Mark@mdo.com</td>
+              <td>Darth</td>
+              <td>Vader</td>
+              <td>+1-66-666-666</td>
+              <td>lord.vader@imperio.gal</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Borrar</button>
+                <button class="btn btn-info">Ver</button>
+              </td>
+            </tr>
+            <!-- Luke Skywalker -->
+            <tr>
+              <th scope="row">2</th>
+              <td>Luke</td>
+              <td>Skywalker</td>
+              <td>+1-77-777-777</td>
+              <td>luke.skywalker@alianza.rebelde</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Borrar</button>
+                <button class="btn btn-info">Ver</button>
+              </td>
+            </tr>
+            <!-- Leia Organa -->
+            <tr>
+              <th scope="row">3</th>
+              <td>Leia</td>
+              <td>Organa</td>
+              <td>+1-55-555-555</td>
+              <td>princesa.leia@alianza.rebelde</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Borrar</button>
+                <button class="btn btn-info">Ver</button>
+              </td>
+            </tr>
+            <!-- Han Solo -->
+            <tr>
+              <th scope="row">4</th>
+              <td>Han</td>
+              <td>Solo</td>
+              <td>+1-44-444-444</td>
+              <td>han.solo@halconmilenario.com</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Borrar</button>
+                <button class="btn btn-info">Ver</button>
+              </td>
+            </tr>
+            <!-- Obi-Wan Kenobi -->
+            <tr>
+              <th scope="row">5</th>
+              <td>Obi-Wan</td>
+              <td>Kenobi</td>
+              <td>+1-33-333-333</td>
+              <td>obiwan@jedi.order</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Borrar</button>
+                <button class="btn btn-info">Ver</button>
+              </td>
+            </tr>
+            <!-- Yoda -->
+            <tr>
+              <th scope="row">6</th>
+              <td>Yoda</td>
+              <td>(Maestro Jedi)</td>
+              <td>+1-99-999-999</td>
+              <td>yoda@jedi.order</td>
               <td>
                 <button class="btn btn-warning">Editar</button>
                 <button class="btn btn-danger">Borrar</button>
@@ -81,7 +147,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="modalContactoLabel">
-              Modal title
+              Administrar Contacto
             </h1>
             <button
               type="button"
@@ -93,52 +159,68 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Email address</label
-                >
+                <label for="nombre" class="form-label">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombre"
+                  aria-describedby="Ingresar nombre"
+                  minlength="2"
+                  maxlength="50"
+                  placeholder="Ej: Juan"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="apellido"
+                  minlength="2"
+                  maxlength="50"
+                  placeholder="Ej: Perez"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
                 <input
                   type="email"
                   class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
+                  id="email"
+                  placeholder="Ej: juanperez@mail.com"
                 />
-                <div id="emailHelp" class="form-text">
-                  We'll never share your email with anyone else.
-                </div>
               </div>
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Password</label
-                >
+                <label for="telefono" class="form-label">Telefono</label>
                 <input
-                  type="password"
+                  type="tel"
                   class="form-control"
-                  id="exampleInputPassword1"
+                  id="telefono"
+                  placeholder="Ej: +54381222333"
                 />
               </div>
-              <div class="mb-3 form-check">
+              <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
                 <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="exampleCheck1"
+                  type="text"
+                  class="form-control"
+                  id="imagen"
+                  placeholder="Ej: http://image"
                 />
-                <label class="form-check-label" for="exampleCheck1"
-                  >Check me out</label
-                >
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="mb-3">
+                <label for="notas" class="form-label">Notas</label>
+                <textarea
+                  class="form-control"
+                  id="notas"
+                  placeholder="Agrega tus notas aqui"
+                  maxlength="250"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+         
         </div>
       </div>
     </div>
