@@ -13,11 +13,18 @@ const crearContacto= ()=>{
     const contactoNuevo = new Contacto( inputNombre.value , inputApellido.value, inputTelefono.value, inputEmail.value, inputImagen.value,inputNotas.value)
     //guardar el contacto en un array
     agenda.push(contactoNuevo)
+    console.log(agenda)
+    //guardar la agenda en localstorage
+    guardarLocalStorage()
     limpiarFormulario();
 }
 
 const limpiarFormulario = ()=>{
     formularioContacto.reset()
+}
+
+const guardarLocalStorage = ()=>{
+    localStorage.setItem('agendaKey', JSON.stringify(agenda))
 }
 
 //declarar variables
@@ -29,7 +36,7 @@ const inputEmail = document.querySelector('#email')
 const inputTelefono = document.querySelector('#telefono')
 const inputNotas = document.querySelector('#notas')
 const inputImagen = document.querySelector('#imagen')
-const agenda = []
+const agenda = JSON.parse(localStorage.getItem('agendaKey')) || []
 
 //agrego los manejadores de eventos
 btnAgregar.addEventListener('click', abrirModal)
