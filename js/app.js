@@ -17,6 +17,7 @@ const crearContacto= ()=>{
     //guardar la agenda en localstorage
     guardarLocalStorage()
     limpiarFormulario();
+    // mostrar un mensaje al usuario indicando que se creo el contacto
 }
 
 const limpiarFormulario = ()=>{
@@ -46,3 +47,4 @@ formularioContacto.addEventListener('submit', (e)=>{
     crearContacto()
     //algun dia aqui voy a editar un contacto
 })
+
