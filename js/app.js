@@ -28,6 +28,33 @@ const guardarLocalStorage = ()=>{
     localStorage.setItem('agendaKey', JSON.stringify(agenda))
 }
 
+const cargarDatosTabla = ()=>{
+    //verificar si la agenda tiene datos
+    if(agenda.length !== 0){
+        //dibujar una fila por cada contacto de la agenda
+        agenda.map((contacto)=> dibujarFila(contacto) )
+    }
+
+    //si no hay datos en la agenda mostrar un mensaje al usuario
+}
+
+const dibujarFila = (contacto)=>{
+    console.log(contacto)
+    //agregar una fila (tr) nueva al tbody de la tabla de contactos
+    tablaContactos.innerHTML += `<tr>
+              <th scope="row">1</th>
+              <td>${contacto.nombre}</td>
+              <td>${contacto.apellido}</td>
+              <td>${contacto.telefono}</td>
+              <td>${contacto.email}</td>
+              <td>
+                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-danger">Borrar</button>
+                <button class="btn btn-info">Ver</button>
+              </td>
+            </tr>` 
+}
+
 //declarar variables
 const btnAgregar = document.getElementById('btnAgregar')
 const formularioContacto = document.querySelector('form')
@@ -38,6 +65,7 @@ const inputTelefono = document.querySelector('#telefono')
 const inputNotas = document.querySelector('#notas')
 const inputImagen = document.querySelector('#imagen')
 const agenda = JSON.parse(localStorage.getItem('agendaKey')) || []
+const tablaContactos = document.querySelector('tbody');
 
 //agrego los manejadores de eventos
 btnAgregar.addEventListener('click', abrirModal)
@@ -48,3 +76,5 @@ formularioContacto.addEventListener('submit', (e)=>{
     //algun dia aqui voy a editar un contacto
 })
 
+//resto de la logica
+cargarDatosTabla()
