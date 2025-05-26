@@ -13,10 +13,11 @@ const creaContacto=()=>{
     const nuevoContacto = new Contacto(inputNombre.value, inputApellido.value, inputTel.value,inputEmail.value,inputImg.value,inputNota.value)
     console.log(nuevoContacto);
     agenda.push(nuevoContacto)
-    limpiarForm()
     //guardar la agenda en local storage
     guardarLocalStorage()
+    limpiarForm()
     //guardar el contacto en un array
+    //mostrar un mensaje al usuario que indique el usuario se guardo correctamente
 }
 
 const limpiarForm =()=>{
