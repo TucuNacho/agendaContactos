@@ -20,6 +20,11 @@ const creaContacto=()=>{
     limpiarForm()
     //guardar el contacto en un array
     //mostrar un mensaje al usuario que indique el usuario se guardo correctamente
+    Swal.fire({
+  title: "Contacto creado!",
+  text: `El contacto ${nuevoContacto.nombre} ${nuevoContacto.apellido} se ha creado correctamente`,
+  icon: "success"
+});
 }
 
 const limpiarForm =()=>{
