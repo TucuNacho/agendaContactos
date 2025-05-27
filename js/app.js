@@ -15,6 +15,8 @@ const creaContacto=()=>{
     agenda.push(nuevoContacto)
     //guardar la agenda en local storage
     guardarLocalStorage()
+    //dibujar este contacto en la tabla
+    dibujarFila(nuevoContacto, agenda.length)
     limpiarForm()
     //guardar el contacto en un array
     //mostrar un mensaje al usuario que indique el usuario se guardo correctamente
@@ -32,15 +34,15 @@ const cargarDatosTabla = () =>{
     //verificar si la agenda tiene datos
     if (agenda.length > 0) {
         //dibujar una fila por cada contacto
-        agenda.map((contacto)=> dibujarFila(contacto))
+        agenda.map((contacto, indice)=> dibujarFila(contacto, indice+1))
     }
 }
 
-const dibujarFila = (contacto) => {
+const dibujarFila = (contacto, indice) => {
     console.log(contacto);
     // agregar una fila (tr) nueva al tbody de la tabla de contactos
     tablaContactos.innerHTML += `<tr>
-              <th scope="row">1</th>
+              <th scope="row">${indice}</th>
               <td>${contacto.nombre}</td>
               <td>${contacto.apellido}</td>
               <td>${contacto.telefono}</td>
