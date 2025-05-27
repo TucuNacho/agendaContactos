@@ -64,11 +64,15 @@ const dibujarFila = (contacto, indice) => {
               <td>${contacto.email}</td>
               <td>
                 <button class="btn btn-warning">Editar</button>
-                <button class="btn btn-danger">Borrar</button>
+                <button class="btn btn-danger" onclick="eliminarContacto()">Borrar</button>
                 <button class="btn btn-info">Ver</button>
               </td>
             </tr>`;
 };
+
+window.eliminarContacto = ()=>{
+     console.log('aqui deberia borrar un contacto')
+}
 
 //declarar variables
 const btnAgregar = document.getElementById("btnAgregar");
