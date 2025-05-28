@@ -64,15 +64,22 @@ const dibujarFila = (contacto, indice) => {
               <td>${contacto.email}</td>
               <td>
                 <button class="btn btn-warning">Editar</button>
-                <button class="btn btn-danger" onclick="eliminarContacto()">Borrar</button>
+                <button class="btn btn-danger" onclick="eliminarContacto('${contacto.id}')">Borrar</button>
                 <button class="btn btn-info">Ver</button>
               </td>
             </tr>`;
 };
 
-window.eliminarContacto = ()=>{
-     console.log('aqui deberia borrar un contacto')
-}
+window.eliminarContacto = (id) => {
+  console.log("aqui deberia borrar un contacto");
+  console.log(id);
+  //buscar y borrar el contacto del array agenda
+  const posicionContactoBuscado = agenda.findIndex((contacto)=> contacto.id === id)
+  agenda.splice(posicionContactoBuscado, 1)
+  //actualizar el localstorage
+  guardarLocalStorage()
+  //actualizar la tabla de contactos
+};
 
 //declarar variables
 const btnAgregar = document.getElementById("btnAgregar");
