@@ -72,7 +72,11 @@ const dibujarFila = (contacto, indice) => {
 window.eliminarContacto = (indice) => {
     console.log("Eliminando contacto...");
     //buscar y borrar el contacto del array agenda
+    const posicionContactoBuscado= agenda.findIndex((contacto)=> contacto.id === indice)
+    agenda.splice(posicionContactoBuscado,1)
+    tablaContactos.children[posicionContactoBuscado].remove()
   console.log(indice);
+  guardarLocalStorage()
   
     //actualizar el localStorage
 }
