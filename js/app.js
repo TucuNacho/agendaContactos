@@ -63,7 +63,7 @@ const dibujarFila = (contacto, indice) => {
               <td>${contacto.email}</td>
               <td>
                 <button class="btn btn-warning">Editar</button>
-                <button class="btn btn-danger" onclick='eliminarContacto('${contacto.id}}')' >Borrar</button>
+                <button class="btn btn-danger" onclick="eliminarContacto('${contacto.id}')" >Borrar</button>
                 <button class="btn btn-info">Ver</button>
               </td>
             </tr>`;
