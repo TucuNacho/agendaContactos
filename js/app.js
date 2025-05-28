@@ -75,10 +75,13 @@ window.eliminarContacto = (id) => {
   console.log(id);
   //buscar y borrar el contacto del array agenda
   const posicionContactoBuscado = agenda.findIndex((contacto)=> contacto.id === id)
-  agenda.splice(posicionContactoBuscado, 1)
+ agenda.splice(posicionContactoBuscado, 1)
   //actualizar el localstorage
   guardarLocalStorage()
   //actualizar la tabla de contactos
+  console.log(posicionContactoBuscado)
+  tablaContactos.children[posicionContactoBuscado].remove()
+  //todo: corregir las celdas de la tabla cuando borramos un contacto
 };
 
 //declarar variables
