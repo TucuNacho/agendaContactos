@@ -63,7 +63,7 @@ const dibujarFila = (contacto, indice) => {
               <td>${contacto.telefono}</td>
               <td>${contacto.email}</td>
               <td>
-                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-warning" onclick="prepararContacto('${contacto.id}')">Editar</button>
                 <button class="btn btn-danger" onclick="eliminarContacto('${contacto.id}')">Borrar</button>
                 <button class="btn btn-info">Ver</button>
               </td>
@@ -83,6 +83,20 @@ window.eliminarContacto = (id) => {
   tablaContactos.children[posicionContactoBuscado].remove()
   //todo: corregir las celdas de la tabla cuando borramos un contacto
 };
+
+window.prepararContacto =(id)=>{
+  console.log('aqui tengo que preparar el contacto',id)
+  //cargar los datos en el modal
+  const contactoBuscado = agenda.find((contacto)=> contacto.id === id)
+  inputNombre.value = contactoBuscado.nombre
+  inputApellido.value = contactoBuscado.apellido
+  inputEmail.value = contactoBuscado.email
+  inputTelefono.value = contactoBuscado.telefono
+  inputNotas.value = contactoBuscado.notas
+  inputImagen.value = contactoBuscado.imagen
+  //abrir el modal
+  abrirModal()
+}
 
 //declarar variables
 const btnAgregar = document.getElementById("btnAgregar");
