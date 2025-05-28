@@ -62,7 +62,7 @@ const dibujarFila = (contacto, indice) => {
               <td>${contacto.telefono}</td>
               <td>${contacto.email}</td>
               <td>
-                <button class="btn btn-warning">Editar</button>
+                <button class="btn btn-warning"onclick="editarContacto('${contacto.id}')" >Editar</button>
                 <button class="btn btn-danger" onclick="eliminarContacto('${contacto.id}')" >Borrar</button>
                 <button class="btn btn-info">Ver</button>
               </td>
@@ -79,6 +79,18 @@ window.eliminarContacto = (indice) => {
   guardarLocalStorage()
   
     //actualizar el localStorage
+}
+
+window.editarContacto = (id) =>{
+  console.log('editando...',id);
+  const contactoBuscado = agenda.find((contacto)=> contacto.id === id)
+  inputNombre.value = contactoBuscado.nombre
+  inputApellido.value = contactoBuscado.apellido
+  inputEmail.value = contactoBuscado.email
+  inputTel.value = contactoBuscado.telefono
+  inputNota.value = contactoBuscado.notas
+  inputImg.value = contactoBuscado.imagen
+  abrirModal()
 }
 
 //declarar variables
