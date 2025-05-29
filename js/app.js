@@ -8,7 +8,7 @@ const abrirModal = () => {
   //aqui abro la ventana modal
   modalContacto.show();
   //cambie la variabl para que cree contactos
-  creandoContacto= true;
+  creandoContacto = true;
 };
 
 const crearContacto = () => {
@@ -76,50 +76,56 @@ window.eliminarContacto = (id) => {
   console.log("aqui deberia borrar un contacto");
   console.log(id);
   //buscar y borrar el contacto del array agenda
-  const posicionContactoBuscado = agenda.findIndex((contacto)=> contacto.id === id)
- agenda.splice(posicionContactoBuscado, 1)
+  const posicionContactoBuscado = agenda.findIndex(
+    (contacto) => contacto.id === id
+  );
+  agenda.splice(posicionContactoBuscado, 1);
   //actualizar el localstorage
-  guardarLocalStorage()
+  guardarLocalStorage();
   //actualizar la tabla de contactos
-  console.log(posicionContactoBuscado)
-  tablaContactos.children[posicionContactoBuscado].remove()
+  console.log(posicionContactoBuscado);
+  tablaContactos.children[posicionContactoBuscado].remove();
   //todo: corregir las celdas de la tabla cuando borramos un contacto
 };
 
-window.prepararContacto =(id)=>{
-  console.log('aqui tengo que preparar el contacto',id)
+window.prepararContacto = (id) => {
+  console.log("aqui tengo que preparar el contacto", id);
   //cargar los datos en el modal
-  const contactoBuscado = agenda.find((contacto)=> contacto.id === id)
-  inputNombre.value = contactoBuscado.nombre
-  inputApellido.value = contactoBuscado.apellido
-  inputEmail.value = contactoBuscado.email
-  inputTelefono.value = contactoBuscado.telefono
-  inputNotas.value = contactoBuscado.notas
-  inputImagen.value = contactoBuscado.imagen
+  const contactoBuscado = agenda.find((contacto) => contacto.id === id);
+  inputNombre.value = contactoBuscado.nombre;
+  inputApellido.value = contactoBuscado.apellido;
+  inputEmail.value = contactoBuscado.email;
+  inputTelefono.value = contactoBuscado.telefono;
+  inputNotas.value = contactoBuscado.notas;
+  inputImagen.value = contactoBuscado.imagen;
   //abrir el modal
-  abrirModal()
+  abrirModal();
   //guardo el id del contacto que quiero editar
   idContactoEditar = id;
-  creandoContacto= false;
-}
+  creandoContacto = false;
+};
 
-const editarContacto = ()=>{
-  console.log('aqui debo agregar la logica que edite al contacto en el array')
+const editarContacto = () => {
+  console.log("aqui debo agregar la logica que edite al contacto en el array");
   //agarrar los datos del formulario y actualizarlos dentro del array agenda
-  const posicionContacto = agenda.findIndex((contacto)=> contacto.id === idContactoEditar)
-  console.log(posicionContacto)
-  agenda[posicionContacto].nombre = inputNombre.value
-  agenda[posicionContacto].apellido = inputApellido.value
-  agenda[posicionContacto].telefono = inputTelefono.value
-  agenda[posicionContacto].email = inputEmail.value
-  agenda[posicionContacto].notas = inputNotas.value
-  agenda[posicionContacto].imagen = inputImagen.value
+  const posicionContacto = agenda.findIndex(
+    (contacto) => contacto.id === idContactoEditar
+  );
+  console.log(posicionContacto);
+  agenda[posicionContacto].nombre = inputNombre.value;
+  agenda[posicionContacto].apellido = inputApellido.value;
+  agenda[posicionContacto].telefono = inputTelefono.value;
+  agenda[posicionContacto].email = inputEmail.value;
+  agenda[posicionContacto].notas = inputNotas.value;
+  agenda[posicionContacto].imagen = inputImagen.value;
 
   //actualizar el localstorage
-guardarLocalStorage();
+  guardarLocalStorage();
+  //limpiar el formulario
+  //cerrar el modal
   //actualizar la tabla de contacto
   //agregar un mensaje al usuario
-}
+};
 
 //declarar variables
 const btnAgregar = document.getElementById("btnAgregar");
@@ -132,20 +138,19 @@ const inputNotas = document.querySelector("#notas");
 const inputImagen = document.querySelector("#imagen");
 const agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
 const tablaContactos = document.querySelector("tbody");
-let idContactoEditar = null
-let creandoContacto = true
+let idContactoEditar = null;
+let creandoContacto = true;
 
 //agrego los manejadores de eventos
 btnAgregar.addEventListener("click", abrirModal);
 formularioContacto.addEventListener("submit", (e) => {
   e.preventDefault();
-  if(creandoContacto){
- //aqui voy a crear un contacto
-  crearContacto();
-  }else{
+  if (creandoContacto) {
+    //aqui voy a crear un contacto
+    crearContacto();
+  } else {
     editarContacto();
   }
- 
   //algun dia aqui voy a editar un contacto
 });
 
