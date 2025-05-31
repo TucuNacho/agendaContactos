@@ -77,12 +77,6 @@ window.eliminarContacto = (id) => {
   const posicionContactoBuscado = agenda.findIndex(
     (contacto) => contacto.id === id
   );
-  // agenda.splice(posicionContactoBuscado, 1);
-  //actualizar el localStorage
-  // guardarLocalStorage();
-  //actualizar la  tabla de contactos
-  // tablaContactos.children[posicionContactoBuscado].remove();
-  //confirmacion de contacto borrado
   const contactoBorrar = agenda[posicionContactoBuscado];
   Swal.fire({
     title: `Estas seguro que desea borrar a ${contactoBorrar.nombre} ${contactoBorrar.apellido} ?`,
