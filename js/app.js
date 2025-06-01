@@ -1,39 +1,39 @@
-import Contacto from "./crearContacto.js";
+import Contacto from "./classContacto.js";
 
-//funciones
+// funciones
 const abrirModal = () => {
   const modalContacto = new bootstrap.Modal(
     document.getElementById("modalContacto")
   );
   //aqui abro la ventana modal
   modalContacto.show();
-  //cambiar variable para q cree contactos
+  //cambie la variabl para que cree contactos
   creandoContacto = true;
 };
 
-const creaContacto = () => {
-  //todo:tomar los datos del formulario y validar
+const crearContacto = () => {
+  //todo: tomar los datos del formulario y validarlos
   //con los datos voy a crear un objeto contacto
-  const nuevoContacto = new Contacto(
+  const contactoNuevo = new Contacto(
     inputNombre.value,
     inputApellido.value,
-    inputTel.value,
+    inputTelefono.value,
     inputEmail.value,
-    inputImg.value,
-    inputNota.value
+    inputIm.value,
+    inputNotas.value
   );
-  console.log(nuevoContacto);
-  agenda.push(nuevoContacto);
-  //guardar la agenda en local storage
-  guardarLocalStorage();
-  //dibujar este contacto en la tabla
-  dibujarFila(nuevoContacto, agenda.length);
-  limpiarForm();
   //guardar el contacto en un array
-  //mostrar un mensaje al usuario que indique el usuario se guardo correctamente
+  agenda.push(contactoNuevo);
+  console.log(agenda);
+  //guardar la agenda en localstorage
+  guardarLocalStorage();
+  //dibujar este contacto nuevo en la tabla
+  dibujarFila(contactoNuevo, agenda.length);
+  limpiarFormulario();
+  // mostrar un mensaje al usuario indicando que se creo el contacto
   Swal.fire({
-    title: "Contacto creado!",
-    text: `El contacto ${nuevoContacto.nombre} ${nuevoContacto.apellido} se ha creado correctamente`,
+    title: "Contacto creado",
+    text: `El contacto ${contactoNuevo.nombre}, fue creado correctamente`,
     icon: "success",
   });
 };
@@ -77,32 +77,18 @@ window.eliminarContacto = (id) => {
   const posicionContactoBuscado = agenda.findIndex(
     (contacto) => contacto.id === id
   );
-  const contactoBorrar = agenda[posicionContactoBuscado];
-  Swal.fire({
-    title: `Estas seguro que desea borrar a ${contactoBorrar.nombre} ${contactoBorrar.apellido} ?`,
-    text: "No podrás revertir esta acción",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Sí, borrar!",
-    cancelButtonText: "No, cancelar!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      agenda.splice(posicionContactoBuscado, 1);
-      guardarLocalStorage();
-      tablaContactos.children[posicionContactoBuscado].remove();
-      Swal.fire({
-        title: `El contacto eliminado!`,
-        text: "El contacto ha sido eliminado.",
-        icon: "success",
-      });
-    }
-  });
+  agenda.splice(posicionContactoBuscado, 1);
+  //actualizar el localstorage
+  guardarLocalStorage();
+  //actualizar la tabla de contactos
+  console.log(posicionContactoBuscado);
+  tablaContactos.children[posicionContactoBuscado].remove();
+  //todo: corregir las celdas de la tabla cuando borramos un contacto
 };
 
 window.prepararContacto = (id) => {
-  console.log("editando...", id);
+  console.log("aqui tengo que preparar el contacto", id);
+  //cargar los datos en el modal
   const contactoBuscado = agenda.find((contacto) => contacto.id === id);
   inputNombre.value = contactoBuscado.nombre;
   inputApellido.value = contactoBuscado.apellido;
@@ -110,8 +96,9 @@ window.prepararContacto = (id) => {
   inputTel.value = contactoBuscado.telefono;
   inputNota.value = contactoBuscado.notas;
   inputImg.value = contactoBuscado.imagen;
+  //abrir el modal
   abrirModal();
-  //guardar el id del contacto
+  //guardo el id del contacto que quiero editar
   idContactoEditar = id;
   creandoContacto = false;
 };
@@ -156,7 +143,7 @@ formularioContacto.addEventListener("submit", (e) => {
   e.preventDefault();
   if (creandoContacto) {
     //Aqui creare un contacto
-    creaContacto();
+    crearContacto();
   } else {
     editarContacto();
   }
