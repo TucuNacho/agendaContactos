@@ -7,6 +7,8 @@ const abrirModal = () => {
   );
   //aqui abro la ventana modal
   modalContacto.show();
+  //cambiar variable para q cree contactos
+  creandoContacto = true;
 };
 
 const creaContacto = () => {
@@ -62,20 +64,84 @@ const dibujarFila = (contacto, indice) => {
               <td>${contacto.telefono}</td>
               <td>${contacto.email}</td>
               <td>
-                <button class="btn btn-warning">Editar</button>
-                <button class="btn btn-danger" onclick='eliminarContacto('${contacto.id}}')' >Borrar</button>
+                <button class="btn btn-warning"onclick="prepararContacto('${contacto.id}')" >Editar</button>
+                <button class="btn btn-danger" onclick="eliminarContacto('${contacto.id}')" >Borrar</button>
                 <button class="btn btn-info">Ver</button>
               </td>
             </tr>`;
 };
 
-window.eliminarContacto = (indice) => {
-    console.log("Eliminando contacto...");
-    //buscar y borrar el contacto del array agenda
-  console.log(indice);
-  
-    //actualizar el localStorage
-}
+window.eliminarContacto = (id) => {
+  console.log("Eliminando contacto...");
+  //buscar y borrar el contacto del array agenda
+  const posicionContactoBuscado = agenda.findIndex(
+    (contacto) => contacto.id === id
+  );
+  // agenda.splice(posicionContactoBuscado, 1);
+  //actualizar el localStorage
+  // guardarLocalStorage();
+  //actualizar la  tabla de contactos
+  // tablaContactos.children[posicionContactoBuscado].remove();
+  //confirmacion de contacto borrado
+  const contactoBorrar = agenda[posicionContactoBuscado];
+  Swal.fire({
+    title: `Estas seguro que desea borrar a ${contactoBorrar.nombre} ${contactoBorrar.apellido} ?`,
+    text: "No podrás revertir esta acción",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, borrar!",
+    cancelButtonText: "No, cancelar!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      agenda.splice(posicionContactoBuscado, 1);
+      guardarLocalStorage();
+      tablaContactos.children[posicionContactoBuscado].remove();
+      Swal.fire({
+        title: `El contacto eliminado!`,
+        text: "El contacto ha sido eliminado.",
+        icon: "success",
+      });
+    }
+  });
+};
+
+window.prepararContacto = (id) => {
+  console.log("editando...", id);
+  const contactoBuscado = agenda.find((contacto) => contacto.id === id);
+  inputNombre.value = contactoBuscado.nombre;
+  inputApellido.value = contactoBuscado.apellido;
+  inputEmail.value = contactoBuscado.email;
+  inputTel.value = contactoBuscado.telefono;
+  inputNota.value = contactoBuscado.notas;
+  inputImg.value = contactoBuscado.imagen;
+  abrirModal();
+  //guardar el id del contacto
+  idContactoEditar = id;
+  creandoContacto = false;
+};
+
+const editarContacto = () => {
+  //agarra los datos del formulario y actualizar la tabla de contactos
+  const posicionContacto = agenda.findIndex(
+    (contacto) => contacto.id === idContactoEditar
+  );
+  agenda[posicionContacto].nombre = inputNombre.value;
+  agenda[posicionContacto].apellido = inputApellido.value;
+  agenda[posicionContacto].email = inputEmail.value;
+  agenda[posicionContacto].telefono = inputTel.value;
+  agenda[posicionContacto].notas = inputNota.value;
+  agenda[posicionContacto].imagen = inputImg.value;
+  //actualizar el localStorage
+  guardarLocalStorage();
+  //actualizar la tabla de contactos
+
+  //limpiar el formulario
+  limpiarForm();
+  //cerrar modal
+  //mensaje de actualizado
+};
 
 //declarar variables
 const btnAgregar = document.getElementById("btnAgregar");
@@ -88,13 +154,19 @@ const inputImg = document.getElementById("imagen");
 const inputNota = document.getElementById("notas");
 const agenda = JSON.parse(localStorage.getItem("agendaKey")) || [];
 const tablaContactos = document.querySelector("tbody");
-
+let idContactoEditar = null;
+let creandoContacto = true;
 //agrego los manejadores de eventos
 btnAgregar.addEventListener("click", abrirModal);
 formularioContacto.addEventListener("submit", (e) => {
   e.preventDefault();
-  //Aqui creare un contacto
-  creaContacto();
+  if (creandoContacto) {
+    //Aqui creare un contacto
+    creaContacto();
+  } else {
+    editarContacto();
+  }
+
   //algun dia voy a editar un contacto
 });
 
